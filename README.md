@@ -22,8 +22,6 @@
 
 - Since we are simulating gravity, the central force will drive the particles toward the fixed point in space.
 
-
-
 - In classical mechanics, a central force on an object is a force that is directed towards or away from a point called center of force.
 
 - where F is a force vector, F is a scalar valued force function (whose absolute value gives the magnitude of the force and is positive if the force is outward and negative if the force is inward), r is the position vector, ||r|| is its length, and r̂ is the corresponding unit vector.
@@ -63,19 +61,57 @@
 
 # 2D components for Python
 
-- The equations of motion for a negligible mass moving under the influence of gravity of a larger mass are as follows.
+- The equations of motion for a negligible mass moving under the influence of gravity of a larger mass are as follows:
 
-- Now that we have our equations of motion, we need to convert them to a state form that can be numerically integrated.
+$$
+\ddot{x}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}x
+$$
 
-- The state form includes the position and velocity vector at a certain time.
+$$
+\ddot{y}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}y
+$$
 
-- Here is the state and its time derivative.
+$$
+\ddot{z}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}z
+$$
 
-- The state time derivative will be made into a function that can be numerically integrated.
+- Now that we have our equations of motion, we need to convert them to a state form that can be numerically integrated. The state form includes the position and velocity vector at a certain time. Here is the state and its time derivative.
 
-- Python has built-in numerical integrators that we can utilize for this.
+State:
 
-- To create our orbit, we will be using odeint function from the SciPy package.
+$$
+\mathbf{x}=
+\begin{Bmatrix}
+x\\
+y\\
+z\\
+\dot{x}\\
+\dot{y}\\
+\dot{z}
+\end{Bmatrix}
+$$
+
+Time derivative:
+
+$$
+\dot{\mathbf{x}}=
+\begin{Bmatrix}
+\dot{x}\\
+\dot{y}\\
+\dot{z}\\
+-\frac{\mu}{r^3}x\\
+-\frac{\mu}{r^3}y\\
+-\frac{\mu}{r^3}z
+\end{Bmatrix}
+$$
+
+where
+
+$$
+r=\sqrt{x^2+y^2+z^2}
+$$
+
+- The state time derivative will be made into a function that can be numerically integrated. Python has built-in numerical integrators that we can utilize for this. To create our orbit, we will be using odeint function from the SciPy package.
 
 ---
 
