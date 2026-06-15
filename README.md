@@ -57,9 +57,56 @@
 
 - We make the assumption that the mass of the smaller body is negligible compared to the major body (m₂ << m₁).
 
+# 2D components for Python
 
-https://towardsdatascience.com/use-python-to-create-two-body-orbits-a68aed78099c/
+- The equations of motion for a negligible mass moving under the influence of gravity of a larger mass are as follows:
 
-https://en.wikipedia.org/wiki/Classical_central-force_problem
+$$
+\ddot{x}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}x
+$$
 
-https://en.wikipedia.org/wiki/Central_force
+$$
+\ddot{y}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}y
+$$
+
+$$
+\ddot{z}=-\frac{\mu}{(x^2+y^2+z^2)^{3/2}}z
+$$
+
+- Now that we have our equations of motion, we need to convert them to a state form that can be numerically integrated. The state form includes the position and velocity vector at a certain time. Here is the state and its time derivative.
+
+State:
+
+$$
+\mathbf{x}=
+\begin{Bmatrix}
+x\\
+y\\
+z\\
+\dot{x}\\
+\dot{y}\\
+\dot{z}
+\end{Bmatrix}
+$$
+
+Time derivative:
+
+$$
+\dot{\mathbf{x}}=
+\begin{Bmatrix}
+\dot{x}\\
+\dot{y}\\
+\dot{z}\\
+-\frac{\mu}{r^3}x\\
+-\frac{\mu}{r^3}y\\
+-\frac{\mu}{r^3}z
+\end{Bmatrix}
+$$
+
+where
+
+$$
+r=\sqrt{x^2+y^2+z^2}
+$$
+
+- The state time derivative will be made into a function that can be numerically integrated. Python has built-in numerical integrators that we can utilize for this. To create our orbit, we will be using `odeint` function from the SciPy package.
