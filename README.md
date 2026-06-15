@@ -22,7 +22,7 @@
 
 - Since we are simulating gravity, the central force will drive the particles toward the fixed point in space.
 
-### Wikipedia
+
 
 - In classical mechanics, a central force on an object is a force that is directed towards or away from a point called center of force.
 
